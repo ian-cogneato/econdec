@@ -14,7 +14,7 @@ experiment, containing different sets of subject-number-specific trial lists
 
 The script was run from just outside these directories, and converted and
 wrote the BIDS-standard output at the same level.
-This output was then copy-pasted into the dataset/sourcedata/
+This output was then copy-pasted into econdec/derivatives/
 
 """
 
@@ -40,4 +40,4 @@ for d in dirlist:
                     outpath=os.path.join('sub-'+s,'sub-'+s+'_task-eye_beh.xlsx')                    
                     file.to_excel(outpath)
 Frame=pd.concat(Files)
-Frame.to_excel('sub-all_task-eye_beh.xlsx')
+Frame.to_excel('study-eye_task-all_beh.xlsx')
