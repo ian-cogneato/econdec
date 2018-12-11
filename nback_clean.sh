@@ -2,15 +2,15 @@
 
 IFS=','
 
-mkdir .bup
-attrib +h .bup
+mkdir .bak
+attrib +h .bak
 
 for f in *.txt; do
 	echo "mv $f ${f##*data.}"
 	mv $f ${f##data.}
 	
-	echo "cp $f .bup/$f"
-	cp $f .bup/$f
+	echo "cp $f .bak/$f"
+	cp $f .bak/$f
 	
 	echo "mv $f ${f#*-}"
 	mv $f ${f#*-}
