@@ -6,7 +6,6 @@
 Describes and applies the fix for Study-2 Reversal Calculations in early subjects.
 
 ## Raw EyeLink Data Extraction
-`raw2bids.py`
 
 Data should already be transferred from the EyeLink computer into `../sourcedata/.staging/`.
 
@@ -21,7 +20,7 @@ Data should already be transferred from the EyeLink computer into `../sourcedata
       1. **this file still needs to be written**
    2. `Analysis` => `Reports` => `InterestArea Report`
 
-Raw2BIDS module then finds all the new subjects' data files and copies them into `../sourcedata/ds3/` under `sub-xxx` directories.
+`raw2bids.py` module then finds all the new subjects' data files and copies them into `../sourcedata/ds3/` under `sub-xxx` directories.
 Converts `RESULTS_FILE.txt` into `sub-xxx_task-eye_beh.csv`.
 
 ## EconDec-1 & EconDec-2 Merge
