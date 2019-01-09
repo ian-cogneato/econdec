@@ -1,4 +1,4 @@
-legacies/*
-.ipynb_checkpoints/*
+legacies
+.ipynb_checkpoints
 .vscode
 __pycache__
