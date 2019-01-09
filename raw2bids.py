@@ -14,7 +14,7 @@ def raw2bids(sourcedir,outputdir):
     Files = []
     subjs = []
     for s in os.listdir(sourcedir):
-        if s.startswith('3'):
+        if s.startswith('3') and os.path.isdir(s):
             subjs.append(s)
             spath = os.path.join(sourcedir,s)
             for f in os.listdir(spath):
