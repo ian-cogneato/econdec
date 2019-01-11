@@ -2,15 +2,35 @@
 # coding: utf-8
 
 import os
+from os import path
 import pandas as pd
-import operator
+#import operator
 
-def dfsplit(input_frame, column_criterion, value_criterion, operation_flag = '=='):
-    ops = {'>' : operator.gt, '<' : operator.lt, '==': operator.eq,
-           '!=': operator.ne, '<=': operator.le, '>=': operator.ge}
-    op = ops[operation_flag]
-    output_frame = input_frame[op(input_frame[column_criterion],value_criterion)]
-    return output_frame
+def clean_crlf(fpath):
+    sub = path.basename(path.dirname(fpath))
+    
+    with open(fpath, 'rb') as f:
+        raw_content = f.read()
+        lfnull_content = raw_content.replace(b'\r',b'')
+        
+    outpath = path.join('..','sourcedata','ds3','sub-'+sub,'sub-'+sub+'_task-all_beh.tsv')
+    with open(outpath, 'w') as f:
+        f.write(lfnull_content.decode("utf-8"))
+
+    return(pd.read_csv(outpath, delimiter='\t'))
+
+#def dfsplit(input_frame, column_criterion, value_criterion, operation_flag = '=='):
+#    ops = {'>' : operator.gt, '<' : operator.lt, '==': operator.eq,
+#           '!=': operator.ne, '<=': operator.le, '>=': operator.ge}
+#    op = ops[operation_flag]
+#    output_frame = input_frame[op(input_frame[column_criterion],value_criterion)]
+#    return output_frame
+
+def split_phases(df):
+    return(
+        tuple([df.groupby('Phase').get_group(p) for p in df.Phase.unique()])
+    )
+
 
 def smooth_columns(input_frame):
     column_labels = list(input_frame.columns)
