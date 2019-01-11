@@ -6,6 +6,8 @@ from os import path
 import pandas as pd
 #import operator
 
+# Removes problematic line-breaking carriage returns in a few files without 
+# damaging the appropriate CR-LF line breaks
 def clean_crlf(fpath):
     sub = path.basename(path.dirname(fpath))
     
