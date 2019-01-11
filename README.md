@@ -20,6 +20,32 @@ Data should already be transferred from the EyeLink computer into `../sourcedata
       1. **this file still needs to be written**
    2. `Analysis` => `Reports` => `InterestArea Report`
 
+## Individual Data Extraction
+
+Data Being Pulled from Display Computer:
+
+- Use USB port farthest from wall; the right when looking directly at the computer
+
+Open the folder “Kylie” on desktop: `Kylie/RunThis2018EconDecEyeTracking/.`
+Then select folder for the participant range for which you want to backup the data for (inclusive): `./iEconDec_374_397/`
+
+Need to backup from BOTH:
+
+- `./results/_ssid_/*`
+- `./runtime/dataviewer/_ssid_/*`
+
+On the external
+
+- `2017_2018integration/RunThisED3backup_ResultsWork/iEconDec3/.`
+   - `./results/`
+   - `./runtime/dataviewer/`
+
+and then save to the corresponding folder (i.e. results saved to results)
+
+Note: if you cannot find the ss files on the Display Computer, then ask Dr. Joe Schmidt how to pull from the Host Computer
+
+Once these files are copied to `/r/experiments/econdec/sourcedata/.staging`:
+
 `raw2bids.py` module then finds all the new subjects' data files and copies them into `../sourcedata/ds3/` under `sub-xxx` directories.
 Converts `RESULTS_FILE.txt` into `sub-xxx_task-eye_beh.csv`.
 
