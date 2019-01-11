@@ -27,6 +27,7 @@ Data Being Pulled from Display Computer:
 - Use USB port farthest from wall; the right when looking directly at the computer
 
 Open the folder “Kylie” on desktop: `Kylie/RunThis2018EconDecEyeTracking/.`
+
 Then select folder for the participant range for which you want to backup the data for (inclusive): `./iEconDec_374_397/`
 
 Need to backup from BOTH:
