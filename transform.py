@@ -33,19 +33,6 @@ def score_relative_sleep(row):
     except ValueError as e:
         print(e)
         return('NaN')
-    
-def convert_prob(row):
-    good_prob = row['TrueProbGood']
-    bad_prob = (1.00 - good_prob)
-    return bad_prob
-
-def convert_check(row):
-    subj_resp = row['ProbGood']
-    bad_prob = row['TrueProbGood']
-    old_check = row['EstWithinRange?']
-    new_check = 1 if (bad_prob+.05) >= (subj_resp*.01) >= (bad_prob-.05) else 0
-    return new_check
-
 
 def __init__(self):
     pass
