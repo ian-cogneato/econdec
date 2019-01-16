@@ -1,5 +1,7 @@
 # Move utility functions for data cleaning here
 
+import os
+
 def clean_paths(row):
     return os.path.basename(row['oldfractal'])
 
