@@ -104,8 +104,8 @@ def clean_stockpic(row):
 def clean_selection(row):
     if row['correctfractallocation'] == '(1355, 540)':
         # correct fractal was on right
-        return int(row['selection'])-4
+        return int(float(row['selection'])) - 4
     elif row['correctfractallocation'] == '(565, 540)':
         # correct fractal was on left
-        return -int(row['selection'])+5
+        return -int(float(row['selection'])) + 5
 
