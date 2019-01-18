@@ -3,8 +3,6 @@
 This submodule contains all function definitions required for this pipeline's data cleaning.
 
 Some of these function definitions are duplicates from _utils.utils, the legacy module. In other cases, the function definitions in _utils.utils may be deprecated.
-
-
 """
 
 import os
