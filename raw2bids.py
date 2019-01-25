@@ -4,7 +4,7 @@
 # collects raw EyeLink results dumped in ../sourcedata/.staging and converts to BIDS-spec for downstream processing
 
 import os
-from utils import clean_crlf
+from _utils.extract import clean_crlf
 from shutil import copyfile
 import pandas as pd
 
