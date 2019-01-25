@@ -10,24 +10,6 @@ from os import path
 import numpy as np
 import pandas as pd
 
-def clean_crlf(fpath):
-    """
-    Reads an EyeLink RESULTS_FILE as binary string, writes a TSV file with all carriage return characters removed, then returns the result of reading that TSV file as a pandas.DataFrame.
-
-    A better version of this function would simply return the DataFrame object without writing the TSV file literally.
-    """
-    sub = path.basename(path.dirname(fpath))
-    
-    with open(fpath, 'rb') as f:
-        raw_content = f.read()
-        lfnull_content = raw_content.replace(b'\r',b'')
-        
-    outpath = path.join('..','sourcedata','ds3','sub-'+sub,'sub-'+sub+'_task-all_beh.tsv')
-    with open(outpath, 'w') as f:
-        f.write(lfnull_content.decode("utf-8"))
-
-    return(pd.read_csv(outpath, delimiter='\t'))
-
 def split_phases(df):
     """
     Separates DataFrame into groups by unique values of a column 'Phase', and returns a tuple of DataFrames.
