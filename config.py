@@ -7,3 +7,41 @@ exclusions=(
     300,307,323
 )
 
+new_columns = {
+    # ED-1 & ED-2
+    'face':'facepic', 'runnum':'block', 'trialnum':'trial',
+    'fracrt':'choicert', 'fracst':'choicest','facert':'outcomert', 'facest':'outcomest',
+    'probrt':'esttaskrt', 'probst':'esttaskst','optionchosen':'stockchosen',
+    'probgood':'estimation','trueprobgood':'trueprob', 'totalpayout':'bankaccount',
+    
+    # ED-3
+    'originalparticipant':'subjnum', 'experimenter':'experimentername',
+    'stockimagename':'stockpic', 'bondimagename':'bondpic', 'faceimage':'facepic',
+    'originalblock':'block', 'originaltrialorder':'trial',
+    #'stockfractallocationtype':'cueonleft', 'bondfractallocationtype':'cueonright',
+    'rt':'choicert', 'estimationvalue':'estimation',
+    'trueprobability':'trueprob', 'accuracy':'genderjudgment',
+    'confidencevalue':'confidence', 'facert':'outcomert',
+}
+
+## Prefer to import the above dict - should only have to use below if 
+## there is overlap in the original column names between the datasets
+
+new_df_1_columns = {
+    'face':'facepic', 'runnum':'block', 'trialnum':'trial',
+    'fracrt':'choicert', 'fracst':'choicest','facert':'outcomert', 'facest':'outcomest',
+    'probrt':'esttaskrt', 'probst':'esttaskst','optionchosen':'stockchosen',
+    'probgood':'estimation','trueprobgood':'trueprob', 'totalpayout':'bankaccount',
+    
+}
+new_df_2_columns = new_df_1_columns
+
+new_df_3_columns = {
+    'originalparticipant':'subjnum', 'experimenter':'experimentername',
+    'stockimagename':'stockpic', 'bondimagename':'bondpic', 'faceimage':'facepic',
+    'originalblock':'block', 'originaltrialorder':'trial',
+    #'stockfractallocationtype':'cueonleft', 'bondfractallocationtype':'cueonright',
+    'rt':'choicert', 'estimationvalue':'estimation',
+    'trueprobability':'trueprob', 'accuracy':'genderjudgment',
+    'confidencevalue':'confidence', 'facert':'outcomert'
+    }
