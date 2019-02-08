@@ -1,5 +1,10 @@
 # This module should be used to store immutable configuration parameters of the pipeline / analysis
 
+# Predefined sourcedata and derivatives directory paths
+from pathlib import Path
+sourcedata_dir = Path('..').absolute() / 'sourcedata'
+derivatives_dir = Path('..').absolute() / 'derivatives'
+
 # Subjects being fully excluded from analysis:
 exclusions=(
     117,165,183,189,
@@ -18,10 +23,13 @@ new_columns = {
     'originalparticipant':'subjnum', 'experimenter':'experimentername',
     'stockimagename':'stockpic', 'bondimagename':'bondpic', 'faceimage':'facepic',
     'originalblock':'block', 'originaltrialorder':'trial',
-    #'stockfractallocationtype':'cueonleft', 'bondfractallocationtype':'cueonright',
     'rt':'choicert', 'estimationvalue':'estimation',
     'trueprobability':'trueprob', 'accuracy':'genderjudgment',
-    'confidencevalue':'confidence', 'facert':'outcomert',
+    'confidencevalue':'confidence',
+    # duplicate:
+    #   'facert':'outcomert',
+    # excluded for processing in a different way:
+    #   'stockfractallocationtype':'cueonleft', 'bondfractallocationtype':'cueonright',
 }
 
 ## Prefer to import the above dict - should only have to use below if 
