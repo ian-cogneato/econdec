@@ -7,6 +7,7 @@ Some of these function definitions are duplicates from _utils.utils, the legacy 
 
 import os
 from os import path
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
@@ -107,21 +108,16 @@ def clean_stockchosen(row):
         elif row['stockchosen'] == 'bond':
             return 0
 
-def clean_bondpic(row):
-    """
-    Intended for use with DataFrame.apply()
+def clean_fpath(filepath_string):
+    """Takes a long, absolute-ref, string-type filepath and returns the file basename """
+    return Path(filepath_string).name
 
-    Calls the split function from os.path on the 'bondpic' element
-    """
-    return os.path.split(row['bondpic'])[1]
-
-def clean_stockpic(row):
-    """
-    Intended for use with DataFrame.apply()
-
-    Calls the split function from os.path on the 'stockpic' element
-    """
-    return os.path.split(row['stockpic'])[1]
+def clean_paths(row):
+    """Returns the filepath basename of an 'oldfractal' element from a DataFrame row.
+    
+    Deprecated. Use clean_foaths() with pd.Series.map() instead."""
+    raise Warning('clean_fpaths() is deprecated. Use clean_fpaths() with pd.Series.map() instead.')
+    return Path(row['oldfractal']).name
 
 def clean_selection(row):
     """
@@ -143,14 +139,6 @@ def smooth_columns(input_frame):
     column_labels = list(input_frame.columns)
     input_frame.columns = [c.lower().replace('_','') for c in column_labels]
     return input_frame
-
-def clean_paths(row):
-    """
-    Intended for use with DataFrame.apply()
-
-    Returns the basename of an 'oldfractal' element using basename() from os.path
-    """
-    return os.path.basename(row['oldfractal'])
 
 def normalize(row):
     """
