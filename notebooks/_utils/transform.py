@@ -1,9 +1,9 @@
 # Move utility functions for data transformation here
 
 def sum_oscillations(row):
-    if row['ia-id'] in stock_ia_list:
+    if row['ia-id'] in (1,24,26):
         return sum([row['fsa-ia-02'],row['fsa-ia-25'],row['fsa-ia-27']])
-    elif row['ia-id'] in bond_ia_list:
+    elif row['ia-id'] in (2,25,27):
         return sum([row['fsa-ia-01'],row['fsa-ia-24'],row['fsa-ia-26']])
 
 def oscillation_rate(row):
