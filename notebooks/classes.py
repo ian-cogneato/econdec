@@ -6,6 +6,10 @@ from os import path
 import pandas as pd
 import numpy as np
 
+class myDataFrame(pd.DataFrame):
+    def rename(self, columns):
+        return(myDataFrame(pd.DataFrame(self).rename(columns=columns)))
+
 class OriginalStudy():
     def __init__(self, sourcedata, name):
         self.df = pd.DataFrame()
@@ -37,3 +41,5 @@ class FullStudy():
     
     def validate(self):
         pass
+
+        
