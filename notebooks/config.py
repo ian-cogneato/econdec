@@ -2,8 +2,8 @@
 
 # Predefined sourcedata and derivatives directory paths
 from pathlib import Path
-sourcedata_dir = Path('..').absolute() / 'sourcedata'
-derivatives_dir = Path('..').absolute() / 'derivatives'
+sourcedata_dir = Path().absolute().parents[1] / 'sourcedata'
+derivatives_dir = Path().absolute().parents[1] / 'derivatives'
 
 # Subjects being fully excluded from analysis:
 exclusions=(
