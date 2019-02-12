@@ -115,8 +115,8 @@ def clean_fpath(filepath_string):
 def clean_paths(row):
     """Returns the filepath basename of an 'oldfractal' element from a DataFrame row.
     
-    Deprecated. Use clean_foaths() with pd.Series.map() instead."""
-    raise Warning('clean_fpaths() is deprecated. Use clean_fpaths() with pd.Series.map() instead.')
+    Deprecated. Use clean_fpath() with pd.Series.map() instead."""
+    raise Warning('clean_paths() is deprecated. Use clean_fpath() with pd.Series.map() instead.')
     return Path(row['oldfractal']).name
 
 def clean_selection(row):
