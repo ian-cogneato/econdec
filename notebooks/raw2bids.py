@@ -2,16 +2,28 @@
 # coding: utf-8
 
 # collects raw EyeLink results dumped in ../sourcedata/.staging and converts to BIDS-spec for downstream processing
+from pathlib import Path
 
+from config import sourcedata_dir as sourcedata
+input_dir = sourcedata / '.staging'
+output_dir = sourcedata / 'ds3'
+
+def raw2bids(input_dir, output_dir):
+    Files = []
+    subjs = []
+    for s in input_dir.glob('*'):
+        print(s)
+
+"""    
 import os
 from _utils.extract import clean_crlf
 from shutil import copyfile
 import pandas as pd
 
-sourcedir = os.path.join('..','sourcedata','.staging')
-outputdir = os.path.join('..','sourcedata','ds3')
+sourcedir = os.path.join('..','..','sourcedata','.staging')
+outputdir = os.path.join('..','..','sourcedata','ds3')
 
-def raw2bids(sourcedir,outputdir):
+ def _raw2bids(sourcedir,outputdir):
     Files = []
     subjs = []
     for s in os.listdir(sourcedir):
@@ -39,6 +51,6 @@ def raw2bids(sourcedir,outputdir):
                         print('Already converted\n')
                         
     return('Done')
-
+ """
 if __name__ == "__main__":
-    raw2bids(sourcedir,outputdir)
+    raw2bids(input_dir,output_dir)
