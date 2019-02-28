@@ -17,6 +17,10 @@ def raw2bids(input_dir, output_dir):
         new_sub_name = 'sub-' + sub_dir.name
         new_sub_dir = output_dir / new_sub_name
         
+        # Create the new sub directory if it doesn't exist
+        if not new_sub_dir.is_dir():
+                Path.mkdir(new_sub_dir)
+
         # Copy all Files from subject's staging dir
         # into corresponding ds3 directory
         for file_path in sub_dir.glob('*'):
@@ -34,10 +38,11 @@ def raw2bids(input_dir, output_dir):
                 new_file_path.relative_to(sourcedata)
             ))
 
-            if not new_sub_dir.is_dir():
-                Path.mkdir(new_sub_dir)
             if not new_file_path.is_file():
                 clean_crlf(file_path).to_csv(new_file_path, index=False)
+
+    input('Done')
+    # wait for input
             
 
 
