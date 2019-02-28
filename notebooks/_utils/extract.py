@@ -40,23 +40,18 @@ def concat(dataset, task = 'all'):
 
 
 def clean_crlf(fpath):
+    """Reads an EyeLink RESULTS_FILE as a binary string and removes all carriage-return characters,
+    before returning the result as a DataFrame, to fix an abnormality in some data files.
     """
-    Reads an EyeLink RESULTS_FILE as binary string, writes a TSV file with all carriage return characters removed, then returns the result of reading that TSV file as a pandas.DataFrame.
+    from io import StringIO
 
-    A better version of this function would simply return the DataFrame object without writing the TSV file literally.
-    """
-    sub = fpath.parent
-    
     with open(fpath, 'rb') as f:
         raw_content = f.read()
-        lfnull_content = raw_content.replace(b'\r',b'')
+        content_no_cr = raw_content.replace(b'\r', b'')
+    
+    stringio_obj = StringIO(content_no_cr.decode('utf-8'))
+    return (pd.read_csv(stringio_obj, sep='\t'))
         
-    outpath = sub / ('sub-' + sub.name + '_task-all_beh.tsv')
-    with open(outpath, 'w') as f:
-        f.write(lfnull_content.decode("utf-8"))
-
-    return(pd.read_csv(outpath, delimiter='\t'))
-
 def score_financial_literacy(row):
     resp = row[2]
     if resp == 3:
