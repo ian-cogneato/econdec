@@ -3,17 +3,36 @@
 
 # collects raw EyeLink results dumped in ../sourcedata/.staging and converts to BIDS-spec for downstream processing
 from pathlib import Path
+import pandas as pd
+
+from _utils.extract import clean_crlf
 
 from config import sourcedata_dir as sourcedata
-input_dir = sourcedata / '.staging'
-output_dir = sourcedata / 'ds3'
+staging_dir = sourcedata / '.staging'
+ds3_dir = sourcedata / 'ds3'
 
 def raw2bids(input_dir, output_dir):
-    Files = []
-    subjs = []
-    for s in input_dir.glob('*'):
-        print(s)
+    for sub_dir in input_dir.glob('3*'):
+        new_sub_name = 'sub-' + sub_dir.name
+        new_sub_dir = output_dir / new_sub_name
+        
+        for file_path in sub_dir.glob('RESULTS_FILE.txt'):
+            new_file_name = new_sub_name +'_task-all_beh.csv'
+            new_file_path = new_sub_dir / new_file_name
 
+            print('{0} => {1}'.format(
+                file_path.relative_to(sourcedata),
+                new_file_path.relative_to(sourcedata)
+            ))
+
+            if not new_sub_dir.is_dir():
+                Path.mkdir(new_sub_dir)
+            if not new_file_path.is_file():
+                clean_crlf(file_path).to_csv(new_file_path, index=False)
+            
+
+
+   #print([f for f in Files])
 """    
 import os
 from _utils.extract import clean_crlf
@@ -53,4 +72,4 @@ outputdir = os.path.join('..','..','sourcedata','ds3')
     return('Done')
  """
 if __name__ == "__main__":
-    raw2bids(input_dir,output_dir)
+    raw2bids(staging_dir, ds3_dir)
