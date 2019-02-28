@@ -6,6 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 from _utils.extract import clean_crlf
+from shutil import copyfile
 
 from config import sourcedata_dir as sourcedata
 staging_dir = sourcedata / '.staging'
@@ -16,6 +17,14 @@ def raw2bids(input_dir, output_dir):
         new_sub_name = 'sub-' + sub_dir.name
         new_sub_dir = output_dir / new_sub_name
         
+        # Copy all Files from subject's staging dir
+        # into corresponding ds3 directory
+        for file_path in sub_dir.glob('*'):
+            new_file_path = new_sub_dir / file_path.name
+            if not new_file_path.is_file():
+                copyfile(file_path, new_file_path)
+
+        # Convert RESULTS_FILE into BIDS-format CSV
         for file_path in sub_dir.glob('RESULTS_FILE.txt'):
             new_file_name = new_sub_name +'_task-all_beh.csv'
             new_file_path = new_sub_dir / new_file_name
