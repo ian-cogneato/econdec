@@ -1,0 +1,6 @@
+pathlib
+pandas
+datetime
+shutil
+scipy
+jupyter

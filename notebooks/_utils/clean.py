@@ -7,26 +7,9 @@ Some of these function definitions are duplicates from _utils.utils, the legacy 
 
 import os
 from os import path
+from pathlib import Path
 import numpy as np
 import pandas as pd
-
-def clean_crlf(fpath):
-    """
-    Reads an EyeLink RESULTS_FILE as binary string, writes a TSV file with all carriage return characters removed, then returns the result of reading that TSV file as a pandas.DataFrame.
-
-    A better version of this function would simply return the DataFrame object without writing the TSV file literally.
-    """
-    sub = path.basename(path.dirname(fpath))
-    
-    with open(fpath, 'rb') as f:
-        raw_content = f.read()
-        lfnull_content = raw_content.replace(b'\r',b'')
-        
-    outpath = path.join('..','sourcedata','ds3','sub-'+sub,'sub-'+sub+'_task-all_beh.tsv')
-    with open(outpath, 'w') as f:
-        f.write(lfnull_content.decode("utf-8"))
-
-    return(pd.read_csv(outpath, delimiter='\t'))
 
 def split_phases(df):
     """
@@ -125,21 +108,16 @@ def clean_stockchosen(row):
         elif row['stockchosen'] == 'bond':
             return 0
 
-def clean_bondpic(row):
-    """
-    Intended for use with DataFrame.apply()
+def clean_fpath(filepath_string):
+    """Takes a long, absolute-ref, string-type filepath and returns the file basename """
+    return Path(filepath_string).name
 
-    Calls the split function from os.path on the 'bondpic' element
-    """
-    return os.path.split(row['bondpic'])[1]
-
-def clean_stockpic(row):
-    """
-    Intended for use with DataFrame.apply()
-
-    Calls the split function from os.path on the 'stockpic' element
-    """
-    return os.path.split(row['stockpic'])[1]
+def clean_paths(row):
+    """Returns the filepath basename of an 'oldfractal' element from a DataFrame row.
+    
+    Deprecated. Use clean_fpath() with pd.Series.map() instead."""
+    raise Warning('clean_paths() is deprecated. Use clean_fpath() with pd.Series.map() instead.')
+    return Path(row['oldfractal']).name
 
 def clean_selection(row):
     """
@@ -161,14 +139,6 @@ def smooth_columns(input_frame):
     column_labels = list(input_frame.columns)
     input_frame.columns = [c.lower().replace('_','') for c in column_labels]
     return input_frame
-
-def clean_paths(row):
-    """
-    Intended for use with DataFrame.apply()
-
-    Returns the basename of an 'oldfractal' element using basename() from os.path
-    """
-    return os.path.basename(row['oldfractal'])
 
 def normalize(row):
     """
